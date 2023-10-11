@@ -100,7 +100,7 @@ We need to be careful when using the Init because it will not rerun if we restar
 [Configure gitpod workspaces](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
 
-## Working with Env vars
+## Working with Env vars :yarn:
 
 We can list out all Environment variables (env vars) using the `end` command.   
 We can filter specific env vars using grep, eg. `env | grep AWS_`  
