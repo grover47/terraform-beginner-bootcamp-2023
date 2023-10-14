@@ -200,12 +200,6 @@ Applies the changes planned in the `terraform plan`, meaning the command execute
 - This will run a plan and pass the changeset to be executed by terraform. `apply` will prompt yes or no. 
 - For automatic approval to execute the `apply` without entering yes, use the tag `--auto-approve`.
 
-#### Terraform Lock Files
-
-`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
-
-The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
-
 <br>
 
 #### Terraform State Files
@@ -219,6 +213,18 @@ The Terraform Lock File should be committed to your Version Control System (VSC)
 #### Terraform Directory
 
 - `.terraform` directory contains binaries of terraform provider. 
+
+#### `terraform destroy`
+
+- `terraform destory`: destroys all the resources that you created with the command `terraform apply`. This is the safest way to get rid of the resources. After having created resources with Terraform, cleaning up resources may accidently leave out some resources running undestroy. 
+
+
+#### Terraform Lock Files
+
+`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
+
+The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
+
 
 <br>
 
@@ -260,6 +266,7 @@ The Terraform Lock File should be committed to your Version Control System (VSC)
 - The comparison between the current state of the resources and the changes that will be made to the resources
 
 <br>
+
 
 ## References
 - `chmod`: https://en.wikipedia.org/wiki/Chmod
