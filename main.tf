@@ -13,6 +13,17 @@ terraform {
   }
 }
 
+terraform {
+  cloud {
+    organization = "terraform_beginner_bootcamp"
+
+    workspaces {
+      name = "terra-house-1"
+    }
+  }
+}
+
+
 provider "aws" {
 
 }
