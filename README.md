@@ -21,9 +21,6 @@
 
 <br>
 
-
-![Terraform Architectural Diagram](https://github.com/grover47/terraform-beginner-bootcamp-2023/assets/10213341/314a0d16-e369-41ce-b94f-5112d75b0c3f)
-
 ## Table of Contents
 
 ## Weekly Journals
