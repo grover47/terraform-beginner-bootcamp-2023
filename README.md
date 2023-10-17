@@ -1,4 +1,23 @@
-# Terraform Beginner Bootcamp 2023
+# Terraform Beginner Bootcamp 2023 - Week 0
+
+## Table of Contents
+
+- [Semantic Versioning](#semantic-versioning-mage)
+- [Install the Terraform CLI](#install-the-terraform-cli)
+- [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
+- [Considerations for Linux Distribution](#considerations-for-linux-distribution)
+  - [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
+  - [Shebang Considerations](#shebang-considerations)
+  - [Execution Considerations](#execution-considerations)
+  - [Linux Permissions Considerations](#linux-permissions-considerations)
+  - [Github Lifecycle (Before, Init, Command)](#github-lifecycle-before-init-command)
+  - [Working with Env vars](#working-with-env-vars)
+- [AWS CLI Installation](#aws-cli-installation)
+- [Issue #9 Terraform random bucket name](#issue-9-terraform-random-bucket-name)
+- [Week 0 Terraform Cloud and Terraform login](#week-0-terraform-cloud-and-terraform-login)
+
+
+<br>
 
 ## Semantic Versioning :mage:
 
@@ -99,13 +118,12 @@ We need to be careful when using the Init because it will not rerun if we restar
 
 [Configure gitpod workspaces](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
-
-## Working with Env vars :yarn:
+### Working with Env vars
 
 We can list out all Environment variables (env vars) using the `end` command.   
 We can filter specific env vars using grep, eg. `env | grep AWS_`  
 
-### Setting and unsetting env vars
+#### Setting and unsetting env vars
 
 In the terminal we can set using `export HELLO=world`   
 Unset the variable using `unset HELLO`  
@@ -122,18 +140,18 @@ Within a bash script we can set env without writing export eg.
 HELLO='world'
 ```
 
-### Printing vars 
+#### Printing vars 
 
 We can print an env var using echo eg. `echo $HELLO`
 
 
-### Scoping of env vars
+#### Scoping of env vars
 
 When you open up new bash terminals in VScode it will not be aware of env vars that you have set in another window. 
 
 If you want to Env vars to persist across all future bash terminals that are open, you need to set env vars in your bash profile. eg `.bash_profile`
 
-### Persisting Env vars in Gitpod
+#### Persisting Env vars in Gitpod
 
 We can persist env vars into Gitpod by storing them in Gitpod Secrets Storage. 
 
@@ -161,26 +179,26 @@ If it is succesful you should see a json payload return that looks like this:
 
 ```
 {
-    "UserId": "AIDASL4FOJFKFLJOWSXRY",
-    "Account": "1234567891012",
-    "Arn": "arn:aws:iam::1234567891012:user/terraform-beginner-bootcamp"
+    "UserId": "AIEAVUO15ZPVHJ5WIJ5KR",
+    "Account": "123456789012",
+    "Arn": "arn:aws:iam::123456789012:user/terraform-beginner-bootcamp"
 }
-
 ```
 We'll need to generate AWS CLI credits from IAM User in order to the user AWS CLI.
 
 <br>
 
-# Terraform Basics
+# Issue #9 Terraform random bucket name
 
-## Terraform Registry
+**Terraform Registry**
 
 Terraform sources their providers and modules from the Terraform registry which is located at [registry.terraform.io](https://registry.terraform.io/).
 
-**Difference between Provider and Module**
-
-- Provider: Cloud service provider that you directly interact with via Terraform. It is an interface to APIs that will allow to create resources in terraform.
-- [Module](https://developer.hashicorp.com/terraform/language/modules): Modules are containers for multiple resources that are used together. A module consists of a collection of `.tf` and/or `.tf.json` files kept together in a directory. Modules are the main way to package and reuse resource configurations with Terraform. 
+**Difference between Provider and Module** 
+- Providers are the direct interfaces to APIs; modules are templates. 
+- **Provider**: Cloud service provider that you directly interact with via Terraform. It is an interface to APIs that will allow to create resources in terraform.
+  - Examples: AWS, Azure, GCP, Kubernetes, Oracle Cloud Structure
+- [**Module**](https://developer.hashicorp.com/terraform/language/modules): Modules are containers for multiple resources that are used together. A module consists of a collection of `.tf` and/or `.tf.json` files kept together in a directory. Modules are the main way to package and reuse resource configurations with Terraform. 
 
 - [Official Terraform Registry](https://registry.terraform.io/)
 - [More on Terraform `random` provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs)
@@ -188,7 +206,7 @@ Terraform sources their providers and modules from the Terraform registry which 
 
 #### `terraform init`
 
-The start of a new terraform project we will run `terraform init` to download the binaries for the terraform providers that we'll use in this project. 
+At the start of a new terraform project we will run `terraform init` to download the binaries for the terraform providers that we'll use in this project. 
 
 #### `terraform plan`
 
@@ -197,8 +215,19 @@ Generates an overview bill of what is going to change from the current set of re
 #### `terraform apply`
 
 Applies the changes planned in the `terraform plan`, meaning the command executes the provisioning of the resources.
-- This will run a plan and pass the changeset to be executed by terraform. `apply` will prompt yes or no. 
+- In Andrew's words: this will run a plan and pass the changeset to be executed by terraform. `apply` will prompt yes or no. 
 - For automatic approval to execute the `apply` without entering yes, use the tag `--auto-approve`.
+
+#### `terraform destroy`
+
+- `terraform destory`: destroys all the resources that you created with the command `terraform apply`. This is the safest way to get rid of the resources. After having created resources with Terraform, cleaning up resources may accidently leave out some resources running undestroy. This may incur unexpected charges (and yes, I got charged 30 USD for the mistake. Shhh... 🤫 although this is not a secret.)
+
+
+#### Terraform Lock Files
+
+`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
+
+The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
 
 <br>
 
@@ -213,18 +242,6 @@ Applies the changes planned in the `terraform plan`, meaning the command execute
 #### Terraform Directory
 
 - `.terraform` directory contains binaries of terraform provider. 
-
-#### `terraform destroy`
-
-- `terraform destory`: destroys all the resources that you created with the command `terraform apply`. This is the safest way to get rid of the resources. After having created resources with Terraform, cleaning up resources may accidently leave out some resources running undestroy. 
-
-
-#### Terraform Lock Files
-
-`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
-
-The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
-
 
 <br>
 
@@ -267,17 +284,14 @@ The Terraform Lock File should be committed to your Version Control System (VSC)
 
 <br>
 
+## Week 0 Terraform Cloud and Terraform login
 
-## References
-- `chmod`: https://en.wikipedia.org/wiki/Chmod
-- `shebang`: https://en.wikipedia.org/wiki/Shebang_(Unix)
-- `gitpod workspaces`: https://www.gitpod.io/docs/configure/workspaces/tasks
-
+- Terraform workspace: a container in Terraform Cloud for infrastructure state, configurations, and settings. 
+- Terraform project: an overarching effort or goal, potentially consisting of multiple Terraform Cloud workspaces.
 
 ### Issues with Terraform Cloud & Gitpod Workspace
 
-When attempting to run `terraform login`, it will launch a wiswig view in bash to generate a token. However, this does not work as expected in Gitpod VS code in the browser. 
-The workaround is to manually generate a token in the [Terraform Cloud console](https://app.terraform.io/app/settings/tokens). 
+When attempting to run `terraform login`, it will launch a wiswig view in bash to generate a token. However, this does not work as expected in Gitpod VS code in the browser. The workaround is to manually generate a token in the [Terraform Cloud console](https://app.terraform.io/app/settings/tokens). 
 
 Then create the credentials file manually: 
 
