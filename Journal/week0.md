@@ -1,7 +1,5 @@
 # Terraform Beginner Bootcamp 2023 - Week 0
 
-=======
-
 ## Table of Contents
 
 - [Semantic Versioning](#semantic-versioning-mage)
@@ -21,19 +19,18 @@
 
 <br>
 
+## Semantic Versioning :mage:
 
-![Terraform Architectural Diagram](https://github.com/grover47/terraform-beginner-bootcamp-2023/assets/10213341/314a0d16-e369-41ce-b94f-5112d75b0c3f)
+This project is going to utilise semantic versioning for its tagging.  
+[semver.org](https://semver.org/)  
+Given a version number **MAJOR.MINOR.PATCH**, increment the:
 
-## Table of Contents
+- **MAJOR** version when you make incompatible API changes
+- **MINOR** version when you add functionality in a backward compatible manner
+- **PATCH** version when you make backward compatible bug fixes  
 
-## Weekly Journals
-- [Week 0 Journal](journal/week0.md)
+<br>
 
-
-
-## Extras
-- [Github Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
-=======
 ## Install the Terraform CLI
 
 ### Considerations with the Terraform CLI changes
@@ -314,4 +311,3 @@ Then paste the following.
     }
 }
 ```
-
